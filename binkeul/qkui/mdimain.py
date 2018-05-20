@@ -176,9 +176,12 @@ class MainWindow (QtGui .QMainWindow ):
 		if self .activeMdiChild ():
 			self .activeMdiChild ().pasteFromClip ()
 	def about (self ):
-		QtGui .QMessageBox .about (self ,"About MDI",
-		"The <b>MDI</b> example demonstrates how to write multiple "
-		"document interface applications using Qt.")
+		QtGui .QMessageBox .about (self ,
+		"""빈글코드에디터에 대하여""",
+		""" 프로그램 설치를 환영합니다! <br><br> 설치에 대한 도움과 사용자를 위한 설명서는 다음의 링크들을 참고하기 바랍니다. <br> ☞ <a href="https://github.com/sinabilo/binkeul">소스저장소</a> <br> ☞ <a href="https://sites.google.com/site/binkeul/binkeuleditor">빈글코드에디터</a><br><br>"""
+		"""
+또한 제작자에 문의를 하려면 <a href="mailto:siblo@naver.com">siblo@naver.com</a> 로 메일을 보내면 됩니다. 메일을 자주 확인하지는 않습니다. 감사합니다.
+""")
 	def setFoboard (self ):
 		if self .activeMdiChild ():
 			self .foboard .setEditor (self .activeMdiChild ())
