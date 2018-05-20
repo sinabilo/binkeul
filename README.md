@@ -44,6 +44,8 @@
     
     svn export https://github.com/sinabilo/binkeul/trunk/binkeul binkeul 
 
+실행
+----------------------
 다음 명령을 실행하면 빈글코드 편집기를 시작할수 있습니다.
     
 .. code:
@@ -61,7 +63,12 @@
 
 
 
+참고자료 
+==========================
 
+* 빈글언어 소개 : https://sites.google.com/site/binkeul
+
+* 빈글코드편집기 사용자용 도움문서 : https://sites.google.com/site/binkeul/binkeuleditor
 
 
 
