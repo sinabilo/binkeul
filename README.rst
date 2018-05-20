@@ -50,7 +50,7 @@
     
 .. code-block:: none
 
-    pythonw -m pinkeul
+    pythonw -m binkeul
 
 
 추가 설치
