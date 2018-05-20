@@ -9,7 +9,7 @@
 요구사항
 -----------------------
 
-* PySide-1.2.4 : 윈도우즈 운영체제에서 PySide-1.2.4 을 Python3.6 에서 설치하려면 `<https://www.lfd.uci.edu/~gohlke/pythonlibs/#pysid>`_e 에서 pyside 의 whl 파일을 다운로드하여 설치하여야 한다.
+* PySide-1.2.4 : 윈도우즈 운영체제에서 PySide-1.2.4 을 Python3.6 에서 설치하려면 `<https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyside>`_ 에서 pyside 의 whl 파일을 다운로드하여 설치하여야 한다.
 
 * peewee-3.3.4
 
