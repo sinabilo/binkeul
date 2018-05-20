@@ -18,7 +18,7 @@
 * svgwrite-1.1.12
 
 
-.. code::
+.. code:
 
     cd C:\Python36-32\Scripts
 
@@ -38,7 +38,7 @@
 ---------------------------
 필요한 패키지 설치가 완료되었으면 Python.3.6.x 의 Lib/site_packages 에 binkeul 폴더를 만들고 저장소로 부터 소스를 복사합니다.
         
-.. code::
+.. code:
     
     cd C:\Python36-32\Lib\site-packages
     
@@ -46,7 +46,7 @@
 
 다음 명령을 실행하면 빈글코드 편집기를 시작할수 있습니다.
     
-.. code:: 
+.. code:
 
     pythonw -m pinkeul
 
