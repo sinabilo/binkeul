@@ -9,7 +9,7 @@
 요구사항
 -----------------------
 
-* PySide-1.2.4 : 윈도우즈 운영체제에서 PySide-1.2.4 을 Python3.6 에서 설치하려면 https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyside 에서 pyside 의 whl 파일을 다운로드하여 설치하여야 한다.
+* PySide-1.2.4 : 윈도우즈 운영체제에서 PySide-1.2.4 을 Python3.6 에서 설치하려면 `<https://www.lfd.uci.edu/~gohlke/pythonlibs/#pysid>`_e 에서 pyside 의 whl 파일을 다운로드하여 설치하여야 한다.
 
 * peewee-3.3.4
 
@@ -18,7 +18,7 @@
 * svgwrite-1.1.12
 
 
-.. code:
+.. code-block:: none
 
     cd C:\Python36-32\Scripts
 
@@ -38,7 +38,7 @@
 ---------------------------
 필요한 패키지 설치가 완료되었으면 Python.3.6.x 의 Lib/site_packages 에 binkeul 폴더를 만들고 저장소로 부터 소스를 복사합니다.
         
-.. code:
+.. code-block:: none
     
     cd C:\Python36-32\Lib\site-packages
     
@@ -48,7 +48,7 @@
 ----------------------
 다음 명령을 실행하면 빈글코드 편집기를 시작할수 있습니다.
     
-.. code:
+.. code-block:: none
 
     pythonw -m pinkeul
 
@@ -66,9 +66,9 @@
 참고자료 
 ==========================
 
-* 빈글언어 소개 : https://sites.google.com/site/binkeul
+* 빈글언어 소개 : `<https://sites.google.com/site/binkeul>`_
 
-* 빈글코드편집기 사용자용 도움문서 : https://sites.google.com/site/binkeul/binkeuleditor
+* 빈글코드편집기 사용자용 도움문서 : `<https://sites.google.com/site/binkeul/binkeuleditor>`_
 
 
 
