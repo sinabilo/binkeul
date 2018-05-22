@@ -1,15 +1,15 @@
-빈글(binkeul) 코드편집기
+Binkeul Code Editor 
 ============================
-빈글(인공언어)코드와 이모지를 편집 저장할 수 있는 GUI 어플리케이션 
+GUI application for editing and saving binkeul (constructed language) code and emoji
 
-설치 
+Install  
 =======================
-본 프로그램은 윈도우즈10과 Python3.6.3 에서 테스트 되어습니다. 다른 환경에서 실행을 보장할 수 없습니다.
+This program has been tested on Windows 10 and Python3.6.3. This can not guarantee to run in other environments.
 
-요구사항
+Requirements
 -----------------------
 
-* PySide-1.2.4 : 윈도우즈 운영체제에서 PySide-1.2.4 을 Python3.6 에서 설치하려면 `<https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyside>`_ 에서 pyside 의 whl 파일을 다운로드하여 설치하여야 한다.
+* PySide-1.2.4 : To install PySide-1.2.4 on Windows operating systems from Python 3.6, you need to download and install pyside whl from `<https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyside>` _ .
 
 * peewee-3.3.4
 
@@ -34,9 +34,9 @@
     ...
 
 
-코드복사 
+Copy Source 
 ---------------------------
-필요한 패키지 설치가 완료되었으면 Python.3.6.x 의 Lib/site_packages 에 binkeul 폴더를 만들고 저장소로 부터 소스를 복사합니다.
+Once the necessary package installation is complete, create a binkeul folder in Lib / site_packages in Python.3.6.x and copy the source from the repository.
         
 .. code-block:: none
     
@@ -44,18 +44,18 @@
     
     svn export https://github.com/sinabilo/binkeul/trunk/binkeul binkeul 
 
-실행
+Run
 ----------------------
-다음 명령을 실행하면 빈글코드 편집기를 시작할수 있습니다.
+You can start the Binkeul Code Editor by executing the following command:
     
 .. code-block:: none
 
     pythonw -m binkeul
 
 
-추가 설치
+Additional installation
 ========================
-본 프로그램을 실행하는데 반드시 필요한 것은 아니지만 betlsvg, betlsvgdir 유틸을 사용하려면 다음 프로그램과 파이썬 패키지를 설치해야 한다. 
+Although it is not absolutely necessary to run this program, the following programs and Python packages must be installed to use the ``betlsvg`` and ``betlsvgdir`` utilities.
 
 * potrace 1.13
 
@@ -63,12 +63,12 @@
 
 
 
-참고자료 
+Reference 
 ==========================
 
-* 빈글언어 소개 : `<https://sites.google.com/site/binkeul>`_
+* Introduction to the binkeul language : `<https://sites.google.com/site/binkeul>`_
 
-* 빈글코드편집기 사용자용 도움문서 : `<https://sites.google.com/site/binkeul/binkeuleditor>`_
+* Help documentation for users of the Binkeul Code Editor : `<https://sites.google.com/site/binkeul/binkeuleditor>`_
 
 
 
