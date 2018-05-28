@@ -77,7 +77,7 @@ class QkFoCtrlButBox (QVBoxLayout ):
 		if input_to =="left":
 			self .foboard .editor .insert (keul )
 		elif input_to =="right":
-			self .foboard .editor .insert (keul ,True )
+			self .foboard .editor .insertmove (keul )
 		elif input_to =="cur":
 			self .foboard .editor .replace (keul )
 class QkFoFinder (QkListWgt ):

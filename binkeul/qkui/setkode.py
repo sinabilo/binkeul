@@ -3,6 +3,7 @@ from PySide .QtGui import *
 from binkeul .qkui .listwgt import QkListWgt
 from binkeul .qkui .butlab import QkBLabel
 from binkeul .betl .bkode import BKodeTb ,BKode
+from binkeul .betl .kodekind import KodeKind ,KindVal
 from binkeul .base import CONF
 from binkeul .binkeul_rc import *
 from binkeul import at_end
@@ -41,7 +42,7 @@ class QkSetKindBox (QComboBox ):
 		self .setMinimumWidth (60 )
 		self .setModel (self .table .model ())
 		self .setView (self .table )
-		self .activated .connect (self .setLevel )
+		self .activated .connect (self .setKind )
 		self .setSizeAdjustPolicy (QComboBox .AdjustToMinimumContentsLength )
 		self .setLineEdit (QLineEdit (self ))
 		self .lineEdit ().setReadOnly (True )
@@ -54,33 +55,37 @@ class QkSetKindBox (QComboBox ):
 		self .table .setRowCount (10 )
 		self .table .verticalHeader ().hide ()
 		self .table .horizontalHeader ().hide ()
+		ikind =iter (KodeKind .items ())
+		nkind =iter (range (100 ))
 		for y in range (10 ):
 			self .table .setColumnWidth (y ,40 )
 			for x in range (10 ):
 				wi =QTableWidgetItem ()
-				tynum =x +y *10
-				wi .setText (str (tynum ))
-				self .table .setItem (x ,y ,wi )
-				co =self .colist [tynum %(len (self .colist ))]
-				if self .tytip .get (tynum ,None ):
-					wi .setToolTip (self .tytip [tynum ])
+				try :
+					_ ,(tykey ,tytip )=next (ikind )
+					wi .setText (tykey )
+					wi .setToolTip (tytip )
+					self .table .setItem (x ,y ,wi )
+					co =self .colist [ord (tykey [0 ])%(len (self .colist ))]
 					wi .setForeground (co [0 ])
 					wi .setBackground (co [1 ])
-				else :
-					wi .setForeground (Qt .darkGray )
+				except :
+					tynum =next (nkind )
+					wi .setText (str (tynum ))
+					wi .setToolTip (self .tytip .get (tynum ,''))
+					self .table .setItem (x ,y ,wi )
+					wi .setForeground (Qt .black )
 					wi .setBackground (Qt .lightGray )
-					wi .setFlags (wi .flags ()&~Qt .ItemIsSelectable )
 		self .table .setMinimumWidth (400 )
-	def setLevel (self ,lv ):
-		lev =self .level
-		if lev :
-			self .setEditText (str (lev ))
+	def setKind (self ,lv ):
+		kd =self .kind
+		if kd :
+			self .setEditText (kd )
 	@property
-	def level (self ):
+	def kind (self ):
 		idx =self .view ().currentIndex ()
 		if idx .isValid ():
-			i =idx .row ()+(idx .column ()*10 )
-			return i
+			return self .view ().model ().data (idx )
 class QkBx4Butgrp (QGroupBox ):
 	def __init__ (self ,parent ):
 		super ().__init__ (parent =parent )
@@ -169,7 +174,11 @@ class QkSetKodeDlg (QDialog ):
 		if BKodeTb .existHxs (self .hxset ):
 			self .bkode =BKodeTb .getBKode (self .hxset )
 			self .setWindowTitle ("Update Kode")
-			self .lvCmb .lineEdit ().setText (str (self .bkode .kind ))
+			kind =KodeKind .get (
+			self .bkode .kind ,
+			(str (self .bkode .kind ),'')
+			)[0 ]
+			self .lvCmb .lineEdit ().setText (kind )
 		else :
 			self .bkode =BKodeTb .getNew (self .hxset )
 			if self .bkode ==None :
@@ -192,9 +201,8 @@ class QkSetKodeDlg (QDialog ):
 			text =self .dicTabs .widget (i ).toPlainText ()
 			if text :
 				dics [key ]=text
-		lev =self .lvCmb .level or 0
-		kode =self .lvCmb .level
-		r =BKodeTb .updateHxs (self .hxset ,bkode =self .bkode ,dics =dics ,kind =lev )
+		kind =KindVal .get (self .lvCmb .kind ,None )or int (self .lvCmb .kind )
+		r =BKodeTb .updateHxs (self .hxset ,bkode =self .bkode ,dics =dics ,kind =kind )
 		return r
 	@classmethod
 	def runModal (cls ,hxset ):

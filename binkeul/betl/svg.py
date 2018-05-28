@@ -61,7 +61,8 @@ rt .right +mg .w ,
 rt .bottom +mg .h ,
 )
 class SvgLayout ():
-	def __init__ (self ,space =Sz (1 ,1 ),margin =Sz (3 ,1 ),hor =True ,limit =0 ,usedefs =False ,conf ={}):
+	def __init__ (self ,space =Sz (1 ,1 ),margin =Sz (3 ,1 ),hor =True ,limit =0 ,usedefs =False ,
+	b64img =False ,conf ={}):
 		super ().__init__ ()
 		self .space =space
 		self .margin =margin
@@ -69,6 +70,7 @@ class SvgLayout ():
 		self .limit =limit
 		self .conf =CONF .chainmap (conf )
 		self .usedefs =usedefs
+		self .b64img =b64img
 		self .reset ()
 	def reset (self ):
 		self .items =None
@@ -81,7 +83,7 @@ class SvgLayout ():
 		self .defs =[]
 		if self .usedefs :
 			for kode in set (items ):
-				self .defs .append (SvgItem (kode ,conf =self .conf ,usedefs =True ))
+				self .defs .append (SvgItem (kode ,conf =self .conf ,usedefs =True ,b64img =self .b64img ))
 	def setItems (self ,items ):
 		raise NotImplementedError ()
 	def getItems (self ):
@@ -128,7 +130,7 @@ class SvgLineLayout (SvgLayout ):
 			if self .usedefs :
 				item =SvgUse (kode ,conf =self .conf )
 			else :
-				item =SvgItem (kode ,usedefs =False ,conf =self .conf )
+				item =SvgItem (kode ,usedefs =False ,b64img =self .b64img ,conf =self .conf )
 			rect =item .rect
 			if self .hor :
 				inpo =Po (prepo .x -rect .left ,prepo .y )

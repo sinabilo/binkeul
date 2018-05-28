@@ -72,6 +72,12 @@ class QkLineEdit (QkLineView ):
 		self .model ().insertRows (cur ,keul )
 		self .updateall ()
 		self .setCurrentIndex (self .currentIndex ())
+	def insertmove (self ,keul ):
+		cur =self .currentIndex ().row ()+1
+		self .model ().insertRows (cur ,keul )
+		self .updateall ()
+		idx =self .model ().index (cur +len (keul )-1 )
+		self .setCurrentIndex (idx )
 	def replace (self ,keul ):
 		cur =self .currentIndex ().row ()
 		self .model ().removeRows (cur ,cur )

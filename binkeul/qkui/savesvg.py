@@ -65,15 +65,18 @@ class QkSaveSvgDlg (QDialog ):
 		glay .setRowMinimumHeight (9 ,50 )
 		self .prevbut =QPushButton ("Preview")
 		glay .addWidget (self .prevbut ,10 ,0 ,1 ,1 )
+		self .viewcodebut =QPushButton ("View Code")
+		glay .addWidget (self .viewcodebut ,10 ,1 ,1 ,1 )
 		self .buttonBox =QDialogButtonBox (Qt .Horizontal )
 		self .buttonBox .addButton (QDialogButtonBox .Cancel )
 		self .buttonBox .addButton (QDialogButtonBox .Ok )
-		glay .addWidget (self .buttonBox ,10 ,1 ,1 ,5 )
+		glay .addWidget (self .buttonBox ,10 ,2 ,1 ,4 )
 		for n in range (6 ):
 			glay .setColumnStretch (n ,50 )
 			glay .setColumnMinimumWidth (n ,80 )
 		self .setLayout (glay )
 		self .prevbut .clicked .connect (self .previewSvg )
+		self .viewcodebut .clicked .connect (self .viewSvgCode )
 		self .filebut .clicked .connect (self .setFileName )
 		self .buttonBox .rejected .connect (self .reject )
 		self .buttonBox .accepted .connect (self .accept )
@@ -95,6 +98,7 @@ class QkSaveSvgDlg (QDialog ):
 			mk .layout .space =key .space
 			mk .layout .limit =key .limit
 			mk .layout .usedefs =True
+			mk .layout .b64img =True
 			mk .layout .conf ["ukode-size-style"]=key .pic2x
 			svg =mk .make (self .keul )
 			self .results [key ]=svg
@@ -109,6 +113,14 @@ class QkSaveSvgDlg (QDialog ):
 			tf .write (svg )
 		tf_url =Path (self .tmpfile .name ).as_uri ()
 		webbrowser .open_new_tab (tf_url )
+	def viewSvgCode (self ):
+		svg =self .makeSvg ()
+		svgcode =str (svg ,"utf8")
+		mb =QtGui .QMessageBox (self )
+		mb .setDetailedText (svgcode )
+		mb .setWindowTitle ("svg code")
+		mb .setText (svgcode [:1000 ])
+		mb .exec_ ()
 	def setFileName (self ):
 		fileName ,filtr =QtGui .QFileDialog .getSaveFileName (self ,filter ="*.svg")
 		if fileName :

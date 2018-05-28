@@ -26,7 +26,7 @@ class MdiChild (QkLineEdit ):
 		self .curFile ="document%d.keul"%MdiChild .sequenceNumber
 		MdiChild .sequenceNumber +=1
 		self .setWindowTitle (self .curFile +'[*]')
-		model =QkLineDoc (Keul .sample (100 ),self )
+		model =QkLineDoc (Keul (),self )
 		self .setModel (model )
 		self .model ().contentsChanged .connect (self .documentWasModified )
 	def loadFile (self ,fileName ):
@@ -180,7 +180,7 @@ class MainWindow (QtGui .QMainWindow ):
 		"""빈글코드에디터에 대하여""",
 		""" 프로그램 설치를 환영합니다! <br><br> 설치에 대한 도움과 사용자를 위한 설명서는 다음의 링크들을 참고하기 바랍니다. <br> ☞ <a href="https://github.com/sinabilo/binkeul">소스저장소</a> <br> ☞ <a href="https://sites.google.com/site/binkeul/binkeuleditor">빈글코드에디터</a><br><br>"""
 		"""
-또한 제작자에 문의를 하려면 <a href="mailto:siblo@naver.com">siblo@naver.com</a> 로 메일을 보내면 됩니다. 메일을 자주 확인하지는 않습니다. 감사합니다.
+또한 제작자에 문의를 하려면 <a href="mailto:siblo@naver.com">siblo@naver.com</a> 로 메일을 보내세요. 메일을 자주 확인하지는 않습니다. 감사합니다.
 """)
 	def setFoboard (self ):
 		if self .activeMdiChild ():
@@ -363,6 +363,8 @@ class MainWindow (QtGui .QMainWindow ):
 			self .mdiArea .setActiveSubWindow (windows [i ])
 	def eventFilter (self ,obj ,e ):
 		if e .type ()==QEvent .KeyPress :
+			if obj in (self .foboard .fo_searchline ,):
+				return super ().eventFilter (obj ,e )
 			if e .key ()in (Qt .Key_Left ,Qt .Key_Right ,Qt .Key_Backspace ):
 				editor =self .activeMdiChild ()
 				if editor and (obj is not editor ):
@@ -372,6 +374,7 @@ class MainWindow (QtGui .QMainWindow ):
 				editor =self .activeMdiChild ()
 				if editor :
 					editor .ppick_kode ()
+				return True
 			elif e .key ()in (
 			Qt .Key_1 ,
 			Qt .Key_2 ,
@@ -382,6 +385,7 @@ class MainWindow (QtGui .QMainWindow ):
 					self .foboard .fo_controlbox .act_input ("cur")
 				elif e .key ()==Qt .Key_3 :
 					self .foboard .fo_controlbox .act_input ("right")
+				return True
 			elif e .key ()==Qt .Key_F10 :
 				self .resize (1000 ,600 )
 		return super ().eventFilter (obj ,e )
