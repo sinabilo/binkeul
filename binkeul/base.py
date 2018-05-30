@@ -43,7 +43,10 @@ CONF =MainConf ()
 SVGCONF =SvgConf ()
 from binkeul .tools .cachefunc import fcached ,pcached ,PCache
 from functools import partial
-fCached =partial (fcached ,datapath ('data','cache'))
+fCached_path =datapath ('data','cache')
+if not os .path .isdir (fCached_path ):
+	os .mkdir (fCached_path )
+fCached =partial (fcached ,fCached_path )
 _PCacheMain_PATH =datapath ('data','-pcache')
 _PCacheMain =PCache (_PCacheMain_PATH )
 pCached =partial (pcached ,_PCacheMain )

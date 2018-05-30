@@ -44,3 +44,12 @@ def hash_file (filename ):
 			chunk =file .read (1024 )
 			h .update (chunk )
 	return h .hexdigest ()
+from urllib import request
+def hash_url (urlname ):
+	h =hashlib .sha1 ()
+	with request .urlopen (urlname )as u :
+		chunk =0
+		while chunk !=b'':
+			chunk =u .read (1024 )
+			h .update (chunk )
+	return h .hexdigest ()

@@ -3,11 +3,12 @@ from pathlib import Path
 import os ,io
 import pathlib ,pickle
 from functools import lru_cache
+from urllib import request
 import peewee as pw
 from PIL import Image
 from binkeul .base import CONF
 from binkeul .betl .kode import Kode ,ForSub
-from binkeul .tools import hash_file ,isurl
+from binkeul .tools import hash_file ,hash_url ,isurl
 from binkeul .tools import pilfunc
 from binkeul .betl .pubcls import Rect ,Sz ,SizeStyle ,FixStyle ,FixR
 from binkeul .tools .svgimage import svgImage
@@ -25,8 +26,23 @@ class UKodeTb (pw .Model ):
 	class Meta :
 		database =db
 	@classmethod
-	def createByUrl (cls ,url ,tgs =''):
-		pass
+	def _fdsFromUrl (cls ,url ):
+		hash =hash_url (url )
+		kind =os .path .splitext (url )[1 ].lower ()
+		path =url
+		with request .urlopen (url )as u :
+			data =u .read ()
+		width ,height =cls ._get_size (kind ,data )
+		assert kind in (".svg",".png",".gif",".jpg")
+		return {"hash":hash ,"kind":kind ,"path":path ,"data":data ,"width":width ,"height":height }
+	@classmethod
+	def createByUrl (cls ,url ,tags =''):
+		q =cls .insert (
+		tags =tags ,
+		mday =date .today (),
+		**cls ._fdsFromUrl (url )
+		)
+		return UKode (q .execute ())
 	@classmethod
 	def _fdsFromFile (cls ,file ):
 		hash =hash_file (file )
@@ -67,10 +83,13 @@ class UKodeTb (pw .Model ):
 		elif kind ==".svg":
 			tree =parse (fp )
 			svg =tree .getroot ()
-			size =tuple (
-			int (re .match ("[0-9]+",g ).group (0 ))for g in
-			(svg .get ("width"),svg .get ("height"))
-			)
+			try :
+				size =tuple (
+				int (re .match ("[0-9]+",g ).group (0 ))for g in
+				(svg .get ("width"),svg .get ("height"))
+				)
+			except :
+				size =tuple (map (int ,svg .get ("viewBox").split ()[2 :]))
 		fp .close ()
 		return size
 	@classmethod
@@ -122,8 +141,8 @@ class UKode (ForSub ,Kode ):
 			import pathlib
 			return pathlib .Path (r .path ).as_uri ()
 	def getSize (self ,style =SizeStyle .pic2x ):
-		UFixSz =60
-		UFixWh =60 *60
+		UFixSz =36
+		UFixWh =36 *36
 		FixSz =FixR *2
 		r =UKodeTb .get (kodeval =self .value )
 		size =Sz (r .width ,r .height )

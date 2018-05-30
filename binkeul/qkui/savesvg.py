@@ -98,7 +98,6 @@ class QkSaveSvgDlg (QDialog ):
 			mk .layout .space =key .space
 			mk .layout .limit =key .limit
 			mk .layout .usedefs =True
-			mk .layout .b64img =True
 			mk .layout .conf ["ukode-size-style"]=key .pic2x
 			svg =mk .make (self .keul )
 			self .results [key ]=svg
