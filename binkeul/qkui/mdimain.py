@@ -26,7 +26,7 @@ class MdiChild (QkLineEdit ):
 		self .curFile ="document%d.keul"%MdiChild .sequenceNumber
 		MdiChild .sequenceNumber +=1
 		self .setWindowTitle (self .curFile +'[*]')
-		model =QkLineDoc (Keul .sample (100 ),self )
+		model =QkLineDoc (Keul (),self )
 		self .setModel (model )
 		self .model ().contentsChanged .connect (self .documentWasModified )
 	def loadFile (self ,fileName ):

@@ -1,4 +1,5 @@
-*-pcache/*
+*-pcache*
+*cache*
 *.back*
 
 # Byte-compiled / optimized / DLL files

@@ -234,6 +234,8 @@ class QkFoBoard (QWidget ):
 		self .fo_searchline .returnPressed .connect (self .search_text )
 		self .fo_searchbut .clicked .connect (self .search_text )
 	def search_text (self ):
+		if self .fo_searchline .text ().strip ()=="":
+			return
 		bkodes =BKodeTb .search (self .fo_searchline .text ())
 		ukodes =UKodeTb .search (self .fo_searchline .text ())
 		kodes =bkodes +ukodes
