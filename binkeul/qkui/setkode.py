@@ -45,7 +45,6 @@ class QkSetKindBox (QComboBox ):
 		self .activated .connect (self .setKind )
 		self .setSizeAdjustPolicy (QComboBox .AdjustToMinimumContentsLength )
 		self .setLineEdit (QLineEdit (self ))
-		self .lineEdit ().setReadOnly (True )
 		self .lineEdit ().setDragEnabled (False )
 		self .setCurrentIndex (-1 )
 		self .lineEdit ().mousePressEvent =lambda e :self .lineEdit ().deselect ()or self .view ().isHidden ()or self .showPopup ()
@@ -77,15 +76,19 @@ class QkSetKindBox (QComboBox ):
 					wi .setForeground (Qt .black )
 					wi .setBackground (Qt .lightGray )
 		self .table .setMinimumWidth (400 )
-	def setKind (self ,lv ):
-		kd =self .kind
-		if kd :
-			self .setEditText (kd )
-	@property
-	def kind (self ):
+	def setKind (self ,lev ):
 		idx =self .view ().currentIndex ()
 		if idx .isValid ():
-			return self .view ().model ().data (idx )
+			kd =self .view ().model ().data (idx )
+			if kd :
+				self .setEditText (kd )
+	@property
+	def kind (self ):
+		kd =self .lineEdit ().text ()
+		if kd in KindVal :
+			return KindVal [kd ]
+		else :
+			return int (kd )
 class QkBx4Butgrp (QGroupBox ):
 	def __init__ (self ,parent ):
 		super ().__init__ (parent =parent )
@@ -114,8 +117,8 @@ class QkSetKodeDlg (QDialog ):
 		self .kodelb =QkBLabel ()
 		self .kodelb .setFixedSize (60 ,60 )
 		glay .addWidget (self .kodelb ,0 ,0 ,2 ,2 )
-		self .lvCmb =QkSetKindBox ()
-		glay .addWidget (self .lvCmb ,0 ,2 ,1 ,1 )
+		self .kdCmb =QkSetKindBox ()
+		glay .addWidget (self .kdCmb ,0 ,2 ,1 ,1 )
 		self .bx4rbutGrp =QkBx4Butgrp (self )
 		glay .addWidget (self .bx4rbutGrp ,0 ,3 ,1 ,3 )
 		self .v_kodeval =QLineEdit ()
@@ -178,14 +181,14 @@ class QkSetKodeDlg (QDialog ):
 			self .bkode .kind ,
 			(str (self .bkode .kind ),'')
 			)[0 ]
-			self .lvCmb .lineEdit ().setText (kind )
+			self .kdCmb .lineEdit ().setText (kind )
 		else :
 			self .bkode =BKodeTb .getNew (self .hxset )
 			if self .bkode ==None :
 				return False
 			self .kodelb .setStyleSheet ("QLabel { background-color : gold}")
 			self .setWindowTitle ("New Kode")
-			self .lvCmb .lineEdit ().setText ('')
+			self .kdCmb .lineEdit ().setText ('-1')
 		self .bx4rbutGrp .setHxs (self .hxset ,curbkode =self .bkode )
 		self .setDics (self .bkode )
 		self .setKode (self .bkode )
@@ -201,7 +204,7 @@ class QkSetKodeDlg (QDialog ):
 			text =self .dicTabs .widget (i ).toPlainText ()
 			if text :
 				dics [key ]=text
-		kind =KindVal .get (self .lvCmb .kind ,None )or int (self .lvCmb .kind )
+		kind =self .kdCmb .kind
 		r =BKodeTb .updateHxs (self .hxset ,bkode =self .bkode ,dics =dics ,kind =kind )
 		return r
 	@classmethod
