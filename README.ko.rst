@@ -2,6 +2,12 @@
 ============================
 빈글(인공언어)코드와 이모지를 편집 저장할 수 있는 GUI 어플리케이션 
 
+.. raw:: html
+    
+    <video width="320" height="240" controls>
+      <source src="https://drive.google.com/uc?authuser=0&id=1ZZPb7Szy6JblYkxZuJ4_-DUar2PMNyfa&export=download" type="video/mp4">
+    </video>
+
 설치   
 =======================
 본 프로그램은 윈도우즈10과 Python3.6.3 에서 테스트 되어습니다. 다른 환경에서 실행을 보장할 수 없습니다.

@@ -2,6 +2,12 @@ Binkeul Code Editor
 ============================
 GUI application for editing and saving binkeul (constructed language) code and emoji
 
+.. raw:: html
+    
+    <video width="320" height="240" controls>
+      <source src="https://drive.google.com/uc?authuser=0&id=1ZZPb7Szy6JblYkxZuJ4_-DUar2PMNyfa&export=download" type="video/mp4">
+    </video>
+
 Install  
 =======================
 This program has been tested on Windows 10 and Python3.6.3. This can not guarantee to run in other environments.
