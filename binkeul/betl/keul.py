@@ -31,6 +31,7 @@ class Keul (array .array ):
 		zts [:30 ]+"..."if len (zts )>30 else zts
 		)
 	def getSvgItem (self ,fix =FixStyle .square ):
+		pass
 		return
 	def toBytes (self ,getio =False ):
 		kbio =io .BytesIO ()

@@ -55,7 +55,16 @@ class Kode (int ):
 		from binkeul .betl .solnode import SKode
 		from binkeul .betl .ukode import UKode ,UKODE_CHN
 		kode =Kode (number )
-		ktype ={31 :BKode ,UKODE_CHN :UKode ,0 :SKode ,2 :SKode }.get (kode .channel )
+		from binkeul .betl .ekode import EKode
+		from binkeul .betl .fkode import FKode
+		ktype ={
+		31 :BKode ,
+		30 :EKode ,
+		UKODE_CHN :UKode ,
+		15 :FKode ,
+		2 :SKode ,
+		0 :SKode ,
+		}.get (kode .channel )
 		return ktype (kode )if ktype else kode
 	@staticmethod
 	def GetChnOfs (number ):
