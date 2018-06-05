@@ -2,7 +2,7 @@
 '''
 from PIL import Image ,ImageOps ,ImageDraw
 from binkeul .betl .pubcls import FixStyle
-from binkeul .betl .ffv import FfvSet
+from binkeul .betl .ffc import FfcSet
 class _Unitmap :
 	_dic ={}
 	def __new__ (cls ,unitsize =2 ):
@@ -21,7 +21,7 @@ class _Unitmap :
 	def unitmap (self ,unitsize =1 ):
 		uz =unitsize
 		self .D =Image .new ('1',(uz *2 ,uz *2 ),0 )
-class FfvPlotFrm :
+class FfcPlotFrm :
 	def __init__ (self ,unitsize =2 ,fix =FixStyle .hor ):
 		'''
         '''
@@ -44,11 +44,12 @@ class FfvPlotFrm :
 		ofs =-self .unitsize
 		return self .grid (u ,v ,ofs ,ofs )
 	pasteD =lambda self ,im ,u ,v :im .paste (self .um .D ,self .gridD (u ,v ))
-	def draw (self ,ffvset ):
+	def draw (self ,ffcset ):
 		im =self .um .newmap ()
-		assert isinstance (ffvset ,FfvSet )
-		for u ,v in ffvset .gen ():
+		assert isinstance (ffcset ,FfcSet )
+		for u ,v in ffcset .gen ():
 			self .pasteD (im ,u ,v )
 		if self .fix ==FixStyle .ver :
-			pass
-		return im
+			return im .transpose (Image .ROTATE_270 )
+		else :
+			return im

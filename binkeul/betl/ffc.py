@@ -1,5 +1,5 @@
 from collections import namedtuple
-FfvMap =[
+FfcMap =[
 (40 ,41 ,42 ,43 ,44 ),
 (35 ,36 ,37 ,38 ,39 ),
 (20 ,15 ,0 ,5 ,10 ),
@@ -10,19 +10,19 @@ FfvMap =[
 (30 ,31 ,32 ,33 ,34 ),
 (25 ,26 ,27 ,28 ,29 ),
 ]
-class Ffv (namedtuple ("_Ffv",['u',"v"])):
+class Ffc (namedtuple ("_Ffc",['u',"v"])):
 	@property
 	def x (self ):return (self .u *2 )
 	@property
 	def y (self ):return (self .v *2 )
-FfvOrd =list (range (45 ))
-for v ,ln in enumerate (FfvMap ):
+FfcOrd =list (range (45 ))
+for v ,ln in enumerate (FfcMap ):
 	for u ,idx in enumerate (ln ):
-		FfvOrd [idx ]=Ffv (u -2 ,v -4 )
+		FfcOrd [idx ]=Ffc (u -2 ,v -4 )
 rmidx =(0 ,1 ,2 ,3 ,6 ,7 ,8 ,12 ,15 ,16 ,18 ,22 ,31 )
 hmidx =(0 ,1 ,3 ,7 ,15 ,31 )
 assert len (rmidx )==13
-class FfvSet :
+class FfcSet :
 	def __init__ (self ,data ):
 		assert data .bit_length ()<=32
 		self .data =data
@@ -53,6 +53,8 @@ class FfvSet :
 			s =sum (m for i ,m in enumerate (bitls )if i !=h -1 and (i +1 )&h )
 			bitls [h -1 ]=1 if s %2 else 0
 		self .bitls =bitls
+	def __repr__ (self ):
+		return "{}({})".format (self .__class__ .__name__ ,self .data )
 	def __eq__ (self ,other ):
 		assert isinstance (other ,self .__class__ )
 		return self .bitls ==other .bitls
@@ -62,7 +64,7 @@ class FfvSet :
 	def gen (self ):
 		for idx ,n in enumerate (self .bitls ):
 			if n ==1 :
-				yield FfvOrd [idx ]
+				yield FfcOrd [idx ]
 	@classmethod
 	def sample (cls ):
 		import random

@@ -2,15 +2,15 @@ from functools import lru_cache
 from collections import deque
 from binkeul .betl .pubcls import Po ,Rect
 from binkeul .betl .hxpath import Vec
-from binkeul .betl .ffv import Ffv ,FfvSet
-class FfvPath :
-	def __init__ (self ,ffvs ):
-		assert isinstance (ffvs ,FfvSet )
-		self .ffvs =ffvs
+from binkeul .betl .ffc import Ffc ,FfcSet
+class FfcPath :
+	def __init__ (self ,ffcs ):
+		assert isinstance (ffcs ,FfcSet )
+		self .ffcs =ffcs
 		self .cens =set ()
 		self .vecs =set ()
-		for ffv in ffvs .gen ():
-			pos =FfvPos (ffv )
+		for ffc in ffcs .gen ():
+			pos =FfcPos (ffc )
 			self .cens .update (pos .cens )
 			self .vecs .update (pos .genVecs ())
 	def getActiveVecs (self ):
@@ -45,28 +45,30 @@ class FfvPath :
 			if simple and start_diff ==vec .diff :polygon .pop (0 )
 			polygon_group .append (polygon )
 		return polygon_group
-	def getPathd (self ,simple =True ,chamfer =False ):
+	def getPathd (self ,simple =True ,rotate =False ):
 		all =[]
 		for polygon in self .getPolygons (simple ):
+			if rotate :
+				polygon =[Po (-y ,x )for x ,y in polygon ]
 			x_ys =("{:2}{:2}".format (x ,y )for x ,y in polygon )
 			all .append ("M"+"".join (x_ys )+"z")
 		return "".join (all )
-class FfvPos ():
+class FfcPos ():
 	all =dict ()
-	def __new__ (cls ,ffv ):
-		if ffv in cls .all :
-			return cls .all [ffv ]
+	def __new__ (cls ,ffc ):
+		if ffc in cls .all :
+			return cls .all [ffc ]
 		else :
 			return super ().__new__ (cls )
-	def __init__ (self ,ffv ):
-		assert isinstance (ffv ,Ffv )
-		if ffv in self .all :return
-		self .ffv =ffv
+	def __init__ (self ,ffc ):
+		assert isinstance (ffc ,Ffc )
+		if ffc in self .all :return
+		self .ffc =ffc
 		self .outline =None
 		self .cens =None
 		self .setupD ()
 	def setupD (self ):
-		x ,y =self .ffv .x ,self .ffv .y
+		x ,y =self .ffc .x ,self .ffc .y
 		self .cens =[Po (x ,y )]
 		self .outline =[
 		Po (x -1 ,y -1 ),Po (x ,y -1 ),Po (x +1 ,y -1 ),
