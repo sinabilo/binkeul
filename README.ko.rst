@@ -8,6 +8,8 @@
       <source src="https://drive.google.com/uc?authuser=0&id=1ZZPb7Szy6JblYkxZuJ4_-DUar2PMNyfa&export=download" type="video/mp4">
     </video>
 
+본 프로그램에 쓰인 이모지는 `Twemoji <https://twitter.github.io/twemoji/>`_ 를 사용하였다.
+
 설치   
 =======================
 본 프로그램은 윈도우즈10과 Python3.6.3 에서 테스트 되어습니다. 다른 환경에서 실행을 보장할 수 없습니다.
